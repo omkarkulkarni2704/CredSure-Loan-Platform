@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard - CredSure</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#eef4ff;
+            padding:30px;
+        }
+
+        .container{
+            width:1100px;
+            margin:auto;
+            background:white;
+            border-radius:20px;
+            padding:30px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            color:#2563eb;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th, td{
+            padding:14px;
+            border-bottom:1px solid #ddd;
+            text-align:left;
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+        }
+
+        .approved{
+            color:green;
+            font-weight:bold;
+        }
+
+        .rejected{
+            color:red;
+            font-weight:bold;
+        }
+
+        .review{
+            color:orange;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Loan Applications Dashboard</h1>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Loan Type</th>
+            <th>Loan Amount</th>
+            <th>Employment</th>
+            <th>Risk Score</th>
+            <th>Status</th>
+        </tr>
+
+        <tr th:each="loan : ${applications}">
+            <td th:text="${loan.fullName}"></td>
+            <td th:text="${loan.loanType}"></td>
+            <td th:text="${'₹' + loan.loanAmount}"></td>
+            <td th:text="${loan.employmentType}"></td>
+            <td th:text="${loan.riskScore}"></td>
+
+            <td>
+                <span th:if="${loan.status == 'APPROVED'}" class="approved">
+                    Approved
+                </span>
+
+                <span th:if="${loan.status == 'REJECTED'}" class="rejected">
+                    Rejected
+                </span>
+
+                <span th:if="${loan.status == 'UNDER REVIEW'}" class="review">
+                    Under Review
+                </span>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>
