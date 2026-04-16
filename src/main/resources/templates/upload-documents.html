@@ -146,51 +146,51 @@
 
     </div>
 
-    <div class="right">
+	<div class="right">
 
-        <div class="card">
-            <h2>Application Progress</h2>
+	    <div class="card">
+	        <h2>Application Progress</h2>
 
-            <div class="progress-step">✓ Personal Details Completed</div>
-            <div class="progress-step">✓ Employment Details Completed</div>
-            <div class="progress-step">✓ Loan Details Completed</div>
-            <div class="progress-step">✓ Bank Analysis Completed</div>
+	        <div class="progress-step">✓ Personal Details Completed</div>
+	        <div class="progress-step">✓ Employment Details Completed</div>
+	        <div class="progress-step">✓ Loan Details Completed</div>
+	        <div class="progress-step">✓ Bank Analysis Completed</div>
 
-            <div class="progress-step pending"
-                 th:if="${aadhaarName == null}">
-                ○ Documents Under Verification
-            </div>
+	        <div th:if="${documentsUploaded == null}" class="progress-step pending">
+	            ○ Documents Under Verification
+	        </div>
 
-            <div class="progress-step"
-                 th:if="${aadhaarName != null}">
-                ✓ Documents Uploaded Successfully
-            </div>
+	        <div th:if="${documentsUploaded != null}" class="progress-step">
+	            ✓ Documents Uploaded Successfully
+	        </div>
 
-            <div class="progress-step pending">
-                ○ Final Bank Approval Pending
-            </div>
-        </div>
+	        <div th:if="${finalApproved == null}" class="progress-step pending">
+	            ○ Final Status: Under Review by Bank
+	        </div>
 
-        <div class="card">
-            <h2>Selected Bank</h2>
+	        <div th:if="${finalApproved != null}" class="progress-step">
+	            ✓ Final Loan Approved
+	        </div>
+	    </div>
 
-            <p><b>Bank:</b> HDFC Bank</p>
-            <p><b>Interest Rate:</b> 8.5%</p>
-            <p><b>Expected Approval:</b> Within 2 Days</p>
-        </div>
+	    <div class="card">
+	        <h2>Selected Bank</h2>
 
-        <div class="card" th:if="${aadhaarName != null}">
-            <h2>Uploaded Files</h2>
+	        <p><b>Bank:</b> HDFC Bank</p>
+	        <p><b>Interest Rate:</b> 8.5%</p>
+	        <p><b>Expected Approval:</b> Within 2 Days</p>
+	    </div>
 
-            <p>✓ <span th:text="${aadhaarName}"></span></p>
-            <p>✓ <span th:text="${panName}"></span></p>
-            <p>✓ <span th:text="${salarySlipName}"></span></p>
-            <p>✓ <span th:text="${bankStatementName}"></span></p>
-        </div>
+	    <div class="card" th:if="${aadhaarName != null}">
+	        <h2>Uploaded Files</h2>
 
-    </div>
+	        <p>✓ <span th:text="${aadhaarName}"></span></p>
+	        <p>✓ <span th:text="${panName}"></span></p>
+	        <p>✓ <span th:text="${salarySlipName}"></span></p>
+	        <p>✓ <span th:text="${bankStatementName}"></span></p>
+	    </div>
 
-</div>
+	</div>
 
 </body>
 </html>
