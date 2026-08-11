@@ -167,6 +167,18 @@ http://localhost:8080/
 
 ---
 
+## 🚀 Future Enhancements
+
+* User Login and Registration
+* Admin Dashboard for Loan Review
+* OTP / Email Verification
+* Download Loan Report as PDF
+* SMS and Email Notification Integration
+* Credit Score API Integration
+* Real-Time Application Tracking Dashboard
+
+---
+
 ## 📷 Screenshots
 
 * Smart Loan Application Dashboard
@@ -188,6 +200,9 @@ Contributions are welcome.
 ---
 
 ## 💬 Contact
+
+* Developer: [Omkar Kulkarni](https://github.com/omkarkulkarni2704)
+* Repository: [CredSure Loan Platform](https://github.com/omkarkulkarni2704/CredSure-Loan-Platform)
 * Developer: [Omkar Kulkarni](https://www.linkedin.com/in/omkarkulkarni-dev/)
   
 ---
