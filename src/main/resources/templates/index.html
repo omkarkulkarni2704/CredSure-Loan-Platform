@@ -19,18 +19,31 @@
             align-items:center;
         }
 
-		.logo{
-		    font-size:28px;
-		    font-weight:bold;
-		    color:white;
-		    text-decoration:none;
-		}
+        .logo{
+            font-size:28px;
+            font-weight:bold;
+            color:white;
+            text-decoration:none;
+        }
+
+        .nav{
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+        }
 
         .nav a{
             color:white;
             text-decoration:none;
-            margin-left:25px;
-            font-size:15px;
+            padding:10px 16px;
+            border-radius:8px;
+            background:#1e293b;
+            font-size:14px;
+            transition:0.3s;
+        }
+
+        .nav a:hover{
+            background:#2563eb;
         }
 
         .main{
@@ -87,7 +100,6 @@
             background:#e0edff;
             color:#1e3a8a;
             font-weight:bold;
-            transition:0.3s;
         }
 
         .progress-step.completed{
@@ -97,7 +109,6 @@
 
         .progress-step.completed::before{
             content:"✓ ";
-            font-weight:bold;
         }
 
         .row{
@@ -122,7 +133,6 @@
             border-radius:10px;
             margin-top:10px;
             cursor:pointer;
-            font-size:14px;
         }
 
         .btn{
@@ -159,14 +169,16 @@
 <body>
 
 <div class="header">
+
     <a href="/" class="logo">CredSure</a>
 
     <div class="nav">
         <a href="/">Home</a>
-        <a href="/offers">Loan Offers</a>
-        <a href="/emi">EMI Calculator</a>
-        <a href="/support">Support</a>
+        <a href="/history">My Applications</a>
+        <a href="/admin">Admin Dashboard</a>
+        <a href="/register">Register</a>
     </div>
+
 </div>
 
 <form action="/apply" method="post" th:object="${loanApplication}">
@@ -184,7 +196,7 @@
 
         <div class="center-panel">
 
-            <h1>Smart Loan Application</h1>
+            <h1>Apply For Your Loan</h1>
 
             <h2>Personal Details</h2>
 
@@ -215,7 +227,7 @@
             <h2>Employment & Income</h2>
 
             <div class="row">
-                <input type="number" th:field="*{salary}" placeholder="Monthly Salary" required>
+                <input type="number" th:field="*{salary}" placeholder="Monthly Salary / Income" required>
                 <input type="number" th:field="*{existingEmi}" placeholder="Existing EMI" required>
             </div>
 
@@ -252,7 +264,7 @@
                 Save Loan Details
             </button>
 
-            <button type="submit" class="btn" onclick="completeStep(4)">
+            <button type="submit" class="btn" onclick="return completeStep(4)">
                 Continue To Bank Analysis
             </button>
 
@@ -284,17 +296,7 @@
                 </div>
             </div>
 
-            <div class="card">
-                <h3>Why CredSure?</h3>
-
-                <ul>
-                    <li>Compare multiple bank offers</li>
-                    <li>Instant EMI estimation</li>
-                    <li>Fast document verification</li>
-                    <li>Track application in real time</li>
-                </ul>
-            </div>
-
+            
         </div>
 
     </div>
@@ -313,10 +315,11 @@
 
             if(fullName === "" || age === "" || city === "" || employment === ""){
                 alert("Please fill all Personal Details first.");
-                return;
+                return false;
             }
 
             document.getElementById("step1").classList.add("completed");
+            return true;
         }
 
         if(step === 2){
@@ -326,10 +329,11 @@
 
             if(salary === "" || emi === ""){
                 alert("Please fill all Employment Details first.");
-                return;
+                return false;
             }
 
             document.getElementById("step2").classList.add("completed");
+            return true;
         }
 
         if(step === 3){
@@ -339,10 +343,11 @@
 
             if(loanType === "" || loanAmount === ""){
                 alert("Please fill all Loan Details first.");
-                return;
+                return false;
             }
 
             document.getElementById("step3").classList.add("completed");
+            return true;
         }
 
         if(step === 4){
@@ -352,11 +357,11 @@
                 || !document.getElementById("step3").classList.contains("completed")){
 
                 alert("Please complete all sections before Bank Analysis.");
-                event.preventDefault();
                 return false;
             }
 
             document.getElementById("step4").classList.add("completed");
+            return true;
         }
     }
 </script>

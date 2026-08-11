@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Loan History - CredSure</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#edf3ff;
+            padding:30px;
+        }
+
+        .container{
+            width:1100px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1{
+            color:#2563eb;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:20px;
+        }
+
+        th, td{
+            padding:14px;
+            border-bottom:1px solid #ddd;
+            text-align:left;
+        }
+
+        th{
+            background:#2563eb;
+            color:white;
+        }
+
+        .approved{
+            color:green;
+            font-weight:bold;
+        }
+
+        .review{
+            color:orange;
+            font-weight:bold;
+        }
+
+        .rejected{
+            color:red;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>My Loan Applications</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Loan Type</th>
+            <th>Amount</th>
+            <th>Risk Score</th>
+            <th>Status</th>
+        </tr>
+
+        <tr th:each="loan : ${applications}">
+            <td th:text="${loan.id}"></td>
+            <td th:text="${loan.loanType}"></td>
+            <td th:text="${'₹' + loan.loanAmount}"></td>
+            <td th:text="${loan.riskScore}"></td>
+
+            <td>
+                <span th:if="${loan.status == 'APPROVED'}" class="approved">
+                    Approved
+                </span>
+
+                <span th:if="${loan.status == 'UNDER REVIEW'}" class="review">
+                    Under Review
+                </span>
+
+                <span th:if="${loan.status == 'REJECTED'}" class="rejected">
+                    Rejected
+                </span>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

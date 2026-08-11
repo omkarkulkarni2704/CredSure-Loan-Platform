@@ -1,28 +1,42 @@
 package com.credsure.controller;
 
 import com.credsure.entity.BankOffer;
-import com.credsure.service.BankOfferService;
 import com.credsure.entity.LoanApplication;
+import com.credsure.repository.LoanApplicationRepository;
+import com.credsure.service.BankOfferService;
 import com.credsure.service.LoanService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class LoanController {
 
-	private final LoanService loanService;
-	private final BankOfferService bankOfferService;
+    @Autowired
+    private LoanApplicationRepository loanApplicationRepository;
 
-	public LoanController(LoanService loanService, BankOfferService bankOfferService) {
-	    this.loanService = loanService;
-	    this.bankOfferService = bankOfferService;
-	}
+    private final LoanService loanService;
+    private final BankOfferService bankOfferService;
+
+    public LoanController(LoanService loanService, BankOfferService bankOfferService) {
+        this.loanService = loanService;
+        this.bankOfferService = bankOfferService;
+    }
 
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("loanApplication", new LoanApplication());
         return "index";
+    }
+
+    @GetMapping("/admin")
+    public String adminDashboard(Model model) {
+        model.addAttribute("applications", loanApplicationRepository.findAll());
+        return "admin";
     }
 
     @GetMapping("/offers")
@@ -39,15 +53,24 @@ public class LoanController {
     public String support() {
         return "support";
     }
+    
+    @GetMapping("/history")
+    public String applicationHistory(Model model) {
+
+        model.addAttribute("applications", loanApplicationRepository.findAll());
+
+        return "history";
+    }
 
     @PostMapping("/apply")
     public String applyLoan(@ModelAttribute LoanApplication loanApplication, Model model) {
 
         LoanApplication saved = loanService.processLoan(loanApplication);
+
         BankOffer offer = bankOfferService.getOffer(saved.getRiskScore());
-        model.addAttribute("offer", offer);
 
         model.addAttribute("result", saved);
+        model.addAttribute("offer", offer);
 
         return "result";
     }

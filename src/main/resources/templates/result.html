@@ -1,102 +1,139 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Loan Result</title>
+    <title>Loan Result - CredSure</title>
 
     <style>
         body{
-            font-family:Arial;
+            font-family:Arial, sans-serif;
             background:#edf3ff;
             padding:40px;
+            margin:0;
         }
 
         .box{
-            width:900px;
+            width:950px;
             margin:auto;
             background:white;
             border-radius:20px;
-            padding:30px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
+            padding:35px;
+            box-shadow:0 2px 12px rgba(0,0,0,0.1);
         }
 
         h1{
             color:#2563eb;
+            margin-top:0;
+        }
+
+        h2{
+            color:#1e3a8a;
+            margin-top:35px;
         }
 
         .approved{
-            color:green;
-            font-size:28px;
+            color:#15803d;
+            font-size:30px;
             font-weight:bold;
         }
 
         .review{
-            color:orange;
-            font-size:28px;
+            color:#d97706;
+            font-size:30px;
             font-weight:bold;
         }
 
         .rejected{
-            color:red;
-            font-size:28px;
+            color:#dc2626;
+            font-size:30px;
             font-weight:bold;
         }
 
         .meter{
             width:100%;
             height:20px;
-            background:#ddd;
+            background:#dbeafe;
             border-radius:10px;
             margin-top:15px;
             overflow:hidden;
         }
 
         .meter-fill{
-            height:20px;
+            height:100%;
             background:#2563eb;
+            border-radius:10px;
         }
 
         table{
             width:100%;
             border-collapse:collapse;
             margin-top:15px;
-            margin-bottom:30px;
+            margin-bottom:25px;
         }
 
         table th{
             background:#2563eb;
             color:white;
-            padding:12px;
+            padding:14px;
+            text-align:left;
         }
 
         table td{
             border:1px solid #ddd;
-            padding:12px;
+            padding:14px;
         }
 
         .green-box{
-            background:#e6ffe6;
+            background:#ecfdf5;
+            border-left:6px solid #16a34a;
             padding:20px;
             border-radius:12px;
-            margin-bottom:20px;
+            margin-top:20px;
         }
 
         .red-box{
-            background:#ffe5e5;
+            background:#fef2f2;
+            border-left:6px solid #dc2626;
             padding:20px;
             border-radius:12px;
-            margin-bottom:20px;
+            margin-top:20px;
+        }
+
+        .orange-box{
+            background:#fff7ed;
+            border-left:6px solid #ea580c;
+            padding:20px;
+            border-radius:12px;
+            margin-top:20px;
+        }
+
+        .button-group{
+            margin-top:30px;
+            display:flex;
+            gap:15px;
+            flex-wrap:wrap;
         }
 
         .btn{
-            padding:12px 25px;
-            background:#2563eb;
-            color:white;
+            padding:14px 24px;
             border:none;
             border-radius:10px;
+            color:white;
             text-decoration:none;
+            font-size:15px;
+            cursor:pointer;
             display:inline-block;
-            margin-top:20px;
-            margin-right:10px;
+        }
+
+        .blue-btn{
+            background:#2563eb;
+        }
+
+        .green-btn{
+            background:#16a34a;
+        }
+
+        .gray-btn{
+            background:#475569;
         }
     </style>
 </head>
@@ -106,39 +143,32 @@
 
     <h1 th:text="'Application Result - ' + ${result.fullName}"></h1>
 
-    <p>
-        <b>Loan Type:</b>
-        <span th:text="${result.loanType}"></span>
-    </p>
+    <p><b>Loan Type:</b> <span th:text="${result.loanType}"></span></p>
 
     <p>
         <b>Requested Amount:</b>
         ₹<span th:text="${#numbers.formatDecimal(result.loanAmount,1,0)}"></span>
     </p>
 
-    <p>
-        <b>Employment Type:</b>
-        <span th:text="${result.employmentType}"></span>
-    </p>
+    <p><b>Employment Type:</b> <span th:text="${result.employmentType}"></span></p>
 
     <p><b>Status:</b></p>
 
     <div th:if="${result.status == 'APPROVED'}" class="approved">
-        APPROVED
+        ✓ APPROVED
     </div>
 
     <div th:if="${result.status == 'UNDER REVIEW'}" class="review">
-        UNDER REVIEW
+        ⏳ UNDER REVIEW
     </div>
 
     <div th:if="${result.status == 'REJECTED'}" class="rejected">
-        REJECTED
+        ✕ REJECTED
     </div>
 
-    <br>
+    <h2>Risk Score</h2>
 
     <p>
-        <b>Risk Score:</b>
         <span th:text="${result.riskScore}"></span>/100
     </p>
 
@@ -148,7 +178,7 @@
         </div>
     </div>
 
-    <h2 style="margin-top:35px;">Best Bank Offer</h2>
+    <h2>Best Bank Offer</h2>
 
     <table>
         <tr>
@@ -199,18 +229,18 @@
         <ol>
             <li>Upload Aadhaar Card</li>
             <li>Upload PAN Card</li>
-            <li>Upload last 3 months salary slip</li>
-            <li>Continue with online verification</li>
+            <li>Upload Salary Slip and Bank Statement</li>
+            <li>Proceed for Final Verification</li>
         </ol>
     </div>
 
-    <div th:if="${result.status == 'UNDER REVIEW'}" class="red-box">
+    <div th:if="${result.status == 'UNDER REVIEW'}" class="orange-box">
         <h2>Additional Verification Required</h2>
 
         <ul>
-            <li>Your profile requires manual review</li>
-            <li>Upload salary slips and bank statement</li>
-            <li>Bank officer may contact you</li>
+            <li>Your application requires manual bank review.</li>
+            <li>Upload salary slip and 6-month bank statement.</li>
+            <li>A bank officer may contact you.</li>
         </ul>
     </div>
 
@@ -218,15 +248,30 @@
         <h2>How To Improve Eligibility</h2>
 
         <ul>
-            <li>Reduce your existing EMI below 40% of salary</li>
-            <li>Apply for a smaller loan amount</li>
-            <li>Increase your work experience</li>
-            <li>Improve job stability and income</li>
+            <li>Reduce existing EMI below 40% of salary.</li>
+            <li>Apply for a lower loan amount.</li>
+            <li>Increase work experience and job stability.</li>
+            <li>Maintain a better income-to-loan ratio.</li>
         </ul>
     </div>
 
-    <a href="/upload-documents" class="btn">Upload Documents</a>
-    <a href="/" class="btn">Apply Again</a>
+    <div class="button-group">
+        <a href="/upload-documents" class="btn blue-btn">
+            Upload Documents
+        </a>
+
+        <a href="/history" class="btn gray-btn">
+            View Application History
+        </a>
+
+        <a href="/download-report" class="btn green-btn">
+            Download PDF Report
+        </a>
+
+        <a href="/" class="btn blue-btn">
+            Apply Again
+        </a>
+    </div>
 
 </div>
 

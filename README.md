@@ -1,4 +1,4 @@
-# 💳 CredSure – Smart Loan Origination and Risk Assessment Platform
+# 💳 CredSure – Smart Loan Origination Platform
 
 ### **A fintech web platform to analyze loan eligibility, recommend suitable banks, estimate EMI, and manage the end-to-end loan approval workflow.**
 
@@ -31,7 +31,7 @@ CredSure helps users apply for different types of loans by analyzing their perso
 
 ### 1. Backend:
 
-* **Java 21 / 25**: Core business logic and risk calculation engine.
+* **Java 25**: Core business logic and risk calculation engine.
 * **Spring Boot**: Application framework and backend server.
 * **Spring MVC**: Handles routing and request processing.
 * **Spring Data JPA**: Database ORM for storing loan applications and bank data.
@@ -203,3 +203,7 @@ Contributions are welcome.
 
 * Developer: [Omkar Kulkarni](https://github.com/omkarkulkarni2704)
 * Repository: [CredSure Loan Platform](https://github.com/omkarkulkarni2704/CredSure-Loan-Platform)
+* Developer: [Omkar Kulkarni](https://www.linkedin.com/in/omkarkulkarni-dev/)
+  
+---
+

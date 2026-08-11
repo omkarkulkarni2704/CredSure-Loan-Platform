@@ -26,6 +26,9 @@ public class DocumentController {
         model.addAttribute("salarySlipName", salarySlip.getOriginalFilename());
         model.addAttribute("bankStatementName", bankStatement.getOriginalFilename());
 
+        model.addAttribute("documentsUploaded", true);
+        model.addAttribute("finalApproved", true);
+
         return "upload-documents";
     }
 }
